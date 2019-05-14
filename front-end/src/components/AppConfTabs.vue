@@ -277,6 +277,8 @@
 </template>
 
 <script>
+    import axios from 'axios';
+
     export default {
         name: "app-conf-tabs",
         data() {
@@ -299,30 +301,52 @@
         },
         methods: {
             loadApiUser: function () {
-                let datarequest = new XMLHttpRequest();
-                datarequest.onreadystatechange = function(v) {
-                    if (datarequest.readyState == 4) {
-                        v.loading = false;
-                        v.tableApiUsers = datarequest.response;
-                        // console.log(v.tableApiUsers);
+                axios({
+                    method: 'get',
+                    url: 'http://www.json-generator.com/api/json/get/bVMezbjbfS?indent=2',
+                    headers: {
+                        'Content-Type': 'json'
                     }
-                }.bind(datarequest, this);//
-                datarequest.open('GET', 'http://www.json-generator.com/api/json/get/bVMezbjbfS?indent=2 ');
-                datarequest.responseType = 'json';
-                datarequest.send();
+                }).then(response => (
+                        this.loading = false,
+                        this.tableApiUsers = response.data))
+                  .catch(error => console.log(error));
+
+                // let datarequest = new XMLHttpRequest();
+                // datarequest.onreadystatechange = function(v) {
+                //     if (datarequest.readyState == 4) {
+                //         v.loading = false;
+                //         v.tableApiUsers = datarequest.response;
+                //         // console.log(v.tableApiUsers);
+                //     }
+                // }.bind(datarequest, this);//
+                // datarequest.open('GET', 'http://www.json-generator.com/api/json/get/bVMezbjbfS?indent=2 ');
+                // datarequest.responseType = 'json';
+                // datarequest.send();
             },
             loadUsers: function () {
-                let datarequest = new XMLHttpRequest();
-                datarequest.onreadystatechange = function(v) {
-                    if (datarequest.readyState == 4) {
-                        v.loading = false;
-                        v.tableUsers = datarequest.response;
-                        // console.log(v.tableUsers);
+                axios({
+                    method: 'get',
+                    url: 'http://www.json-generator.com/api/json/get/bPTteKElYO?indent=4',
+                    headers: {
+                        'Content-Type': 'json'
                     }
-                }.bind(datarequest, this);//
-                datarequest.open('GET', 'http://www.json-generator.com/api/json/get/bPTteKElYO?indent=4');
-                datarequest.responseType = 'json';
-                datarequest.send();
+                }).then(response => (
+                    this.loading = false,
+                    this.tableUsers = response.data
+                )).catch(error => console.log(error));
+
+                // let datarequest = new XMLHttpRequest();
+                // datarequest.onreadystatechange = function(v) {
+                //     if (datarequest.readyState == 4) {
+                //         v.loading = false;
+                //         v.tableUsers = datarequest.response;
+                //         // console.log(v.tableUsers);
+                //     }
+                // }.bind(datarequest, this);//
+                // datarequest.open('GET', 'http://www.json-generator.com/api/json/get/bPTteKElYO?indent=4');
+                // datarequest.responseType = 'json';
+                // datarequest.send();
             },
             showEditApiUser: function (edit) {
                 let editUser = this.tableApiUsers.find((item) => item.username === edit);
