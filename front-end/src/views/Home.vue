@@ -31,7 +31,6 @@
                             prop = "expiration"
                             label = "Expiration"
                             >
-
                             </el-table-column>
                             <el-table-column
                             prop = "actions"
